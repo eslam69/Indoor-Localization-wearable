@@ -22,7 +22,7 @@ def read_data(files: list) -> pd.DataFrame:
     except FileExistsError as e:
         print(e)
     Data = pd.concat(data_frames, ignore_index=True)
-    print("shape after reading=  ",Data.shape)
+    # print(Data)
     # print(Data)
     return Data
 
@@ -38,31 +38,16 @@ def clean_data(data: pd.DataFrame) -> pd.DataFrame:
     """
     #replace -99 entries with 0
     # data= data.replace(to_replace=-99 ,value= 0)
-    print("shape after -99 replacements= ",data.shape)
+    # print("shape after -99 replacements= ",data.shape)
 
     #Remove STEP rows
     data = data[data.iloc[:,3] != "STEP"]
-    print("shape after Step replacements= ",data.shape)
+    print(data)
 
     
     return data
 
-
-def  Split_train_test(data: pd.DataFrame) :
-
-    X = data.iloc[:,2:]
-    Y = data.iloc[:,1:2]
-    # sc_x  = StandardScaler()
-    # sc_y = StandardScaler()
-    # X = sc_x.fit_transform(X)
-    # Y = sc_x.fit_transform(Y)
-    X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.4, random_state=4)
-    print("       ",Y.shape)
-    print(X_train.shape,y_train.shape,y_test.shape)
-
-    return X_train.astype('int'), X_test.astype('int'), y_train.astype('int'), y_test.astype('int')
-
-    
+  
 
 
 if __name__ == "__main__":
@@ -75,21 +60,17 @@ if __name__ == "__main__":
     Data = read_data(files)
 
     Data = clean_data(Data)
-    # print(Data.to_string())
 
-    #split Data
-    X_train, X_test, y_train, y_test = Split_train_test(Data)
+    sorted = np.linspace(0, 982, 982, endpoint=False)
 
-    # classifier = svm.SVC(kernel='poly',random_state=4,degree=9)
-    # classifier.fit(X_train , y_train )
+    def cmp(a, b):
+        return Data['STUDBME2'][int(a)] < Data['STUDBME2'][int(b)]
+        
+    sorted.sort(key=cmp)
+
+    print(sorted)
 
     
-    model = svm.SVR(kernel='poly')
-    model.fit(X_train , y_train )
-    entry = X_test.iloc[6:7,:]
-    y_label3 = y_test.iloc[6,0]
-    print("predictio      ",model.predict(entry))
-    print(y_label3)
 
 
 
