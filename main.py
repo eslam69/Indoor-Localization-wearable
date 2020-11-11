@@ -52,10 +52,6 @@ def  Split_train_test(data: pd.DataFrame) :
 
     X = data.iloc[:,2:]
     Y = data.iloc[:,1:2]
-    # sc_x  = StandardScaler()
-    # sc_y = StandardScaler()
-    # X = sc_x.fit_transform(X)
-    # Y = sc_x.fit_transform(Y)
     X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.4, random_state=4)
     print("       ",Y.shape)
     print(X_train.shape,y_train.shape,y_test.shape)
@@ -86,12 +82,21 @@ if __name__ == "__main__":
     
     model = svm.SVR(kernel='poly')
     model.fit(X_train , y_train )
-    entry = X_test.iloc[6:7,:]
-    y_label3 = y_test.iloc[6,0]
-    print("predictio      ",model.predict(entry))
-    print(y_label3)
+    import pickle
+    filename = 'finalized_model.sav'
+    pickle.dump(model, open(filename, 'wb'))
+
+    # entry = X_test.iloc[8:9,:]
+    # y_label3 = y_test.iloc[8,0]
+    # print("predictio      ",model.predict(entry))
+    # print(y_label3)
+    
+
+
+    from sklearn import ensemble
 
 
 
-    # print(model.score(X_test , y_test ))
+
+    print(model.score(X_test , y_test ))
 
