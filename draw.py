@@ -67,5 +67,5 @@ if __name__ == "__main__":
 
     # Down Hallway starts at (1426,3054)
 
-    coords = mapCoordinates(1426,3054,img)
-    drawCircle(img,5,coords,saved)
+    coords = mapCoordinates(1470,5700,img)
+    drawCircle(img,6,coords,saved)

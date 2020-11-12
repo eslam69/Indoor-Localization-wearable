@@ -55,7 +55,7 @@ class MainWindow(QMainWindow):
         # self.setFixedSize(self.pixmap.width(), self.pixmap.height()+10)
     
     def start_tracking(self):
-        self.idx +=1
+        self.idx +=1.2
         time.sleep(0.5)
         # Down Hallway starts at (1426,3054)
         data = get_data(self.firebase)
@@ -64,7 +64,7 @@ class MainWindow(QMainWindow):
         self.yCoordinates = get_coordinates(rss_list) # TO BE USED Later
         print(self.yCoordinates)
         #TODO map coordinates to scale
-        coords = mapCoordinates(1426,3054+30*self.idx,img)
+        coords = mapCoordinates(1426,5700-264*self.idx,img)
         drawCircle(img,5,coords,saved)
         pixmap = QPixmap('modified.png')
         self.label.setPixmap(pixmap)
