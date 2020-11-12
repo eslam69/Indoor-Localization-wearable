@@ -5,7 +5,10 @@ from sklearn.model_selection import train_test_split
 from sklearn.model_selection import train_test_split
 from sklearn import datasets
 from sklearn import svm
+from sklearn import linear_model
 from sklearn.preprocessing import StandardScaler
+from micromlgen import port
+
 
 
 def read_data(files: list) -> pd.DataFrame:
@@ -52,7 +55,7 @@ def  Split_train_test(data: pd.DataFrame) :
 
     X = data.iloc[:,2:]
     Y = data.iloc[:,1:2]
-    X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.4, random_state=4)
+    X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.1, random_state=5)
     print("       ",Y.shape)
     print(X_train.shape,y_train.shape,y_test.shape)
 
@@ -76,24 +79,24 @@ if __name__ == "__main__":
     #split Data
     X_train, X_test, y_train, y_test = Split_train_test(Data)
 
-    # classifier = svm.SVC(kernel='poly',random_state=4,degree=9)
-    # classifier.fit(X_train , y_train )
 
     
     model = svm.SVR(kernel='poly')
     model.fit(X_train , y_train )
+
+
+
     import pickle
-    filename = 'finalized_model.sav'
+    filename = 'finalized_model_svr.sav'
     pickle.dump(model, open(filename, 'wb'))
 
-    # entry = X_test.iloc[8:9,:]
-    # y_label3 = y_test.iloc[8,0]
-    # print("predictio      ",model.predict(entry))
-    # print(y_label3)
+    entry = X_test.iloc[15:16,:]
+    y_label3 = y_test.iloc[15,0]
+    print(entry)
+    # print("prediction =     ",model.predict(X_test))
+    # print(list(y_test.values))
     
 
-
-    from sklearn import ensemble
 
 
 
