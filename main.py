@@ -29,6 +29,7 @@ class MainWindow(QMainWindow):
         self.init_map()
         self.setCentralWidget(self.main_widget)
         self.firebase = pyrebase.initialize_app(configNew)
+        self.db = self.firebase.database()
         self.idx = 0
         self.button.clicked.connect(self.start_loop)
 
@@ -37,7 +38,7 @@ class MainWindow(QMainWindow):
     def start_loop(self):
         timer = QtCore.QTimer(self)
         timer.timeout.connect(self.start_tracking)
-        timer.start(800)
+        timer.start(500)
 
 
     def init_map(self):
@@ -62,8 +63,10 @@ class MainWindow(QMainWindow):
         rss_list = parse_data(data)
         # print(rss_list)
         self.yCoordinates = get_coordinates(rss_list) # TO BE USED Later
+        self.db.child("predictions").set(self.yCoordinates) # Push predictions to the cloud
         print(self.yCoordinates)
         #TODO map coordinates to scale
+        # coords = mapCoordinates(1426,5700-264*self.yCoordinates,img)   #TODO Uncomment
         coords = mapCoordinates(1426,5700-264*self.idx,img)
         drawCircle(img,5,coords,saved)
         pixmap = QPixmap('modified.png')
