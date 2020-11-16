@@ -6,7 +6,7 @@ from PyQt5.QtGui import  QPixmap
 
 from drawOnCropped import track
 import pyrebase
-# from model import get_data,parse_data, get_coordinates
+from model import get_data,parse_data, get_coordinates
 import time
 
 
@@ -57,18 +57,17 @@ class App(QtWidgets.QMainWindow):
         self.idx += 0.1 if (self.idx <= 10) else 0
         # time.sleep(0.005)
        
-        # data = get_data(self.firebase)
-        # rss_list = parse_data(data)
+        data = get_data(self.firebase)
+        rss_list = parse_data(data)
         # print(rss_list)
-        # self.yCoordinates = get_coordinates(rss_list) # TO BE USED Later
-        # self.db.child("predictions").set(self.yCoordinates) # Push predictions to the cloud
-        # print(self.yCoordinates)
+        self.yCoordinates = get_coordinates(rss_list) # TO BE USED Later
+        self.db.child("predictions").set(self.yCoordinates) # Push predictions to the cloud
+        print(self.yCoordinates)
         
         
         # coords = mapCoordinates(1426,5700-264*self.yCoordinates,img)   # TODO Uncomment
-        # track(self.yCoordinates,self.initImg,self.modImg,drawnCircleRad)   # TODO Uncomment
         
-        predictedCords = (0,self.idx)
+        predictedCords = (0,self.yCoordinates )
         drawnCircleRad = 6
         track(predictedCords,self.initImg,self.modImg,drawnCircleRad)
         self.refreshView(self.modImg)
