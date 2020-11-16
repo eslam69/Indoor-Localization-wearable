@@ -38,7 +38,7 @@ class MainWindow(QMainWindow):
     def start_loop(self):
         timer = QtCore.QTimer(self)
         timer.timeout.connect(self.start_tracking)
-        timer.start(500)
+        timer.start(100)
 
 
     def init_map(self):
@@ -66,8 +66,8 @@ class MainWindow(QMainWindow):
         self.db.child("predictions").set(self.yCoordinates) # Push predictions to the cloud
         print(self.yCoordinates)
         #TODO map coordinates to scale
-        # coords = mapCoordinates(1426,5700-264*self.yCoordinates,img)   #TODO Uncomment
-        coords = mapCoordinates(1426,5700-264*self.idx,img)
+        coords = mapCoordinates(1426,5700-264*self.yCoordinates,img)   #TODO Uncomment
+        # coords = mapCoordinates(1426,5700-264*self.idx,img)
         drawCircle(img,5,coords,saved)
         pixmap = QPixmap('modified.png')
         self.label.setPixmap(pixmap)
