@@ -59,10 +59,10 @@ class App(QtWidgets.QMainWindow):
        
         data = get_data(self.firebase)
         rss_list = parse_data(data)
-        # print(rss_list)
+        print(rss_list)
         self.yCoordinates = get_coordinates(rss_list) # TO BE USED Later
         self.db.child("predictions").set(self.yCoordinates) # Push predictions to the cloud
-        print(self.yCoordinates)
+        # print(self.yCoordinates)
         
         
         # coords = mapCoordinates(1426,5700-264*self.yCoordinates,img)   # TODO Uncomment
