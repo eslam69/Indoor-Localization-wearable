@@ -47,7 +47,6 @@ class MainWindow(QMainWindow):
         pixmap = QPixmap('departmentFloorMap.png')
         self.button = QPushButton("Start",self)
         self.label.setPixmap(pixmap)
-
         self.layout.addWidget(self.button)
         self.layout.addWidget(self.label)
 

@@ -25,7 +25,7 @@ def read_data(files: list) -> pd.DataFrame:
     except FileExistsError as e:
         print(e)
     Data = pd.concat(data_frames, ignore_index=True)
-    print("shape after reading=  ",Data.shape)
+    print("shape after reading =  ", Data.shape)
     # print(Data)
     return Data
 
@@ -40,21 +40,21 @@ def clean_data(data: pd.DataFrame) -> pd.DataFrame:
         pd.DataFrame: [description]
     """
     #replace -99 entries with 0
-    # data= data.replace(to_replace=-99 ,value= 0)
+    # data= data.replace(to_replace=-99 ,value= -999)
     print("shape after -99 replacements= ",data.shape)
 
     #Remove STEP rows
     data = data[data.iloc[:,3] != "STEP"]
     print("shape after Step replacements= ",data.shape)
 
-    
     return data
 
 
 def  Split_train_test(data: pd.DataFrame) :
 
     X = data.iloc[:,2:]
-    Y = data.iloc[:,1:2]
+    # Y = data.iloc[:,1:2]
+    Y = data.iloc[:,0:2]
     X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.1, random_state=5)
     print("       ",Y.shape)
     print(X_train.shape,y_train.shape,y_test.shape)
@@ -66,10 +66,13 @@ def  Split_train_test(data: pd.DataFrame) :
 
 if __name__ == "__main__":
     # create list of file names
-    files = ["Data{}.xlsx".format(i) for i in range(1, 4)]
+    files = ["Data{}.xlsx".format(i) for i in range(1, 6)]
     # fix file 1 name
-    files[0] = "Data1.xlsm"
     print(files)
+    files[0] = "Data1.xlsm"
+    files[4] = "Data5.xlsm"
+
+    print("Files after modification: ",files)
 
     Data = read_data(files)
 
@@ -81,18 +84,20 @@ if __name__ == "__main__":
 
 
     
-    model = svm.SVR(kernel='poly')
+    # model = svm.SVR(kernel='poly')
+    model = linear_model.LinearRegression()
+
     model.fit(X_train , y_train )
 
 
 
     import pickle
-    filename = 'finalized_model_svr.sav'
+    filename = 'finalized_model_svrX-Y.sav'
     pickle.dump(model, open(filename, 'wb'))
 
-    entry = X_test.iloc[15:16,:]
-    y_label3 = y_test.iloc[15,0]
-    print(entry)
+    # entry = X_test.iloc[15:16,:]
+    # y_label3 = y_test.iloc[15,:]
+    # print(entry)
     # print("prediction =     ",model.predict(X_test))
     # print(list(y_test.values))
     
