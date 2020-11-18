@@ -8,6 +8,7 @@ from sklearn import svm
 from sklearn import linear_model
 from sklearn.preprocessing import StandardScaler
 from micromlgen import port
+from sklearn import neighbors
 
 
 
@@ -45,6 +46,8 @@ def clean_data(data: pd.DataFrame) -> pd.DataFrame:
 
     #Remove STEP rows
     data = data[data.iloc[:,3] != "STEP"]
+    # data = data[data.iloc[:,1] <= 6 ]
+    # data = data[data.iloc[:,1] >= 3 ]
     print("shape after Step replacements= ",data.shape)
 
     return data
@@ -52,10 +55,10 @@ def clean_data(data: pd.DataFrame) -> pd.DataFrame:
 
 def  Split_train_test(data: pd.DataFrame) :
 
-    X = data.iloc[:,2:]
+    X = data.iloc[:,3:]
     # Y = data.iloc[:,1:2]
-    Y = data.iloc[:,0:2]
-    X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.1, random_state=5)
+    Y = data.iloc[:,2:3]
+    X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.1, random_state=27)
     print("       ",Y.shape)
     print(X_train.shape,y_train.shape,y_test.shape)
 
@@ -66,11 +69,13 @@ def  Split_train_test(data: pd.DataFrame) :
 
 if __name__ == "__main__":
     # create list of file names
-    files = ["Data{}.xlsx".format(i) for i in range(1, 6)]
+    files = ["Data{}.xlsx".format(i) for i in range(1, 7)]
     # fix file 1 name
     print(files)
     files[0] = "Data1.xlsm"
     files[4] = "Data5.xlsm"
+    # files.append("DataX3.xlsx")
+    # files = files[-3:]
 
     print("Files after modification: ",files)
 
@@ -84,26 +89,24 @@ if __name__ == "__main__":
 
 
     
-    # model = svm.SVR(kernel='poly')
-    model = linear_model.LinearRegression()
+    # model = svm.SVC(kernel='poly')
+    model = neighbors.KNeighborsClassifier()
+    # model = linear_model.LinearRegression()
 
     model.fit(X_train , y_train )
 
 
 
     import pickle
-    filename = 'finalized_model_svrX-Y.sav'
+    filename = 'finalized_model_SVC.sav'
     pickle.dump(model, open(filename, 'wb'))
 
-    # entry = X_test.iloc[15:16,:]
-    # y_label3 = y_test.iloc[15,:]
-    # print(entry)
-    # print("prediction =     ",model.predict(X_test))
-    # print(list(y_test.values))
+    entry = X_test.iloc[15:16,:]
+    y_label3 = y_test.iloc[15,:]
+    print(entry)
+    print("prediction =     ",model.predict(X_test))
+    print(list(y_test.values))
     
-
-
-
 
 
     print(model.score(X_test , y_test ))
