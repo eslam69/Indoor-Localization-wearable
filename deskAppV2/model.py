@@ -61,7 +61,7 @@ if __name__ == "__main__":
     loaded_model = pickle.load(open(filename, 'rb'))
     arr = np.array([-99, -58,  -99, -99,  -65,   -99,  -99,  -99,   -99],dtype=int).T
     entry = pd.DataFrame(arr ).transpose()
-    print(entry.shape)
+    # print(entry.shape)
     result = loaded_model.predict(entry)
-    print(result[0])
+    # print(result[0])
 

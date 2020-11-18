@@ -92,7 +92,7 @@ if __name__ == "__main__":
 
     entry = X_test.iloc[15:16,:]
     y_label3 = y_test.iloc[15,0]
-    print(entry)
+    # print(entry)
     # print("prediction =     ",model.predict(X_test))
     # print(list(y_test.values))
     
@@ -101,5 +101,5 @@ if __name__ == "__main__":
 
 
 
-    print(model.score(X_test , y_test ))
+    # print(model.score(X_test , y_test ))
 

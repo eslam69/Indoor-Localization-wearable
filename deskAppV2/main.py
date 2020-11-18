@@ -54,12 +54,12 @@ class App(QtWidgets.QMainWindow):
 
 
     def start_tracking(self):
-        self.idx += 0.1 if (self.idx <= 10) else 0
+        self.idx += 0.2 if (self.idx <= 10) else 0
         # time.sleep(0.005)
        
         data = get_data(self.firebase)
         rss_list = parse_data(data)
-        print(rss_list)
+        # print(rss_list)
         self.yCoordinates = get_coordinates(rss_list) # TO BE USED Later
         self.db.child("predictions").set(self.yCoordinates) # Push predictions to the cloud
         # print(self.yCoordinates)
@@ -67,7 +67,7 @@ class App(QtWidgets.QMainWindow):
         
         # coords = mapCoordinates(1426,5700-264*self.yCoordinates,img)   # TODO Uncomment
         
-        predictedCords = (0,self.yCoordinates )
+        predictedCords = (0,self.idx )
         drawnCircleRad = 6
         track(predictedCords,self.initImg,self.modImg,drawnCircleRad)
         self.refreshView(self.modImg)
