@@ -62,19 +62,33 @@ class MainWindow(QMainWindow):
         rss_list = parse_data(data)
         # print(rss_list)
         self.Coordinates = get_coordinates(rss_list)  # TO BE USED Later
-        self.yCoordinates = self.Coordinates[1]
-        
-        if (self.yCoordinates <= 6.5 and self.yCoordinates >= 3):
-            self.xCoordinates =  self.Coordinates[0]
-        else :
-            self.xCoordinates = 0
+    
         self.db.child("predictions").child("value").set(
             self.yCoordinates)  # Push predictions to the cloud
-        print("X: ", self.xCoordinates, "Y: ", self.yCoordinates)
+        print("Place Prediction: ", self.Coordinates)
 
         # TODO map coordinates to scale
-        coords = mapCoordinates(
-            1426-self.xCoordinates, 5700-264*self.yCoordinates, img)  # TODO Uncomment
+        if self.Coordinates == 0 :
+            print("in hall 0")
+            coords = mapCoordinates(
+            1426, 5700-264*self.yCoordinates, img)  
+        elif self.Coordinates == 1 :
+            print("in hall 1")
+            coords = mapCoordinates(
+            1426-self.xCoordinates, 5700-264*self.yCoordinates, img)  
+        elif self.Coordinates == 2 :
+            print("in hall 2")
+            pass    
+        elif self.Coordinates == 3 :
+            print("in hall 3")
+            pass    
+        elif self.Coordinates == 5 :
+            print("in the Lab")
+            pass    
+        elif self.Coordinates == 6 :
+            print("in TA ROOM")
+            pass    
+        
         # coords = mapCoordinates(1426,5700-264*self.idx,img)
         drawCircle(img, 5, coords, saved)
         pixmap = QPixmap('modified.png')

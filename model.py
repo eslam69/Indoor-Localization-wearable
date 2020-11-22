@@ -5,6 +5,8 @@ import pyrebase
 import matplotlib.pyplot as plt
 import time
 import numpy as np
+from sklearn.preprocessing import scale
+
 
 
 configNew = {
@@ -19,9 +21,10 @@ Firebase = pyrebase.initialize_app(configNew)
 
 
 #load model
-filename = 'finalized_model_svr.sav'
+filename = 'final.sav'
 loaded_modelY = pickle.load(open(filename, 'rb'))
-loaded_modelX = pickle.load(open("finalized_model_svrX.sav", 'rb'))
+Scaler = pickle.load(open("scaler.sav", 'rb'))
+# loaded_modelX = pickle.load(open("finalized_model_svrX.sav", 'rb'))
 
 
 def get_data(firebase=None):
@@ -50,10 +53,10 @@ def get_coordinates(rss_list:list):
     arr = np.array(rss_list,dtype=int).T
     entry = pd.DataFrame(arr).transpose()
     resultX = loaded_modelY.predict(entry)[0]
-    resultY = loaded_modelX.predict(entry)[0]
-    result = [resultX, resultY]
+
+   
     # print(result)
-    return(result)
+    return(resultX)
 
 
 
@@ -61,10 +64,10 @@ def get_coordinates(rss_list:list):
 
 if __name__ == "__main__":
 
-    filename = 'finalized_model_svr.sav'
+    filename = 'final.sav'
     loaded_modelY = pickle.load(open(filename, 'rb'))
-    arr = np.array([-99, -58,  -99, -99,  -65,   -99,  -99,  -99,   -99],dtype=int).T
-    entry = pd.DataFrame(arr ).transpose()
+    arr = np.array([[-47,0,-75,-99,-40,-56,-75,-55,-56]],dtype=int).T
+    entry = pd.DataFrame(arr).transpose()
     print(entry.shape)
     result = loaded_modelY.predict(entry)
     
