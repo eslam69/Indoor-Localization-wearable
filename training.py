@@ -51,14 +51,14 @@ def clean_data(data: pd.DataFrame) -> pd.DataFrame:
     data =data.iloc[:,:-1].astype("int")
     mask5 = (data.iloc[:,2] == 5)  & (data.iloc[:,3] == 99  & data.iloc[:,3])
     data[mask5]  = data.replace(99,1)
-    mask67 = (  (data.iloc[:,2] ==6) | (data.iloc[:,2] == 7)  ) & (data.iloc[:,3] == 99 & data.iloc[:,3])
+    mask67 = (  (data.iloc[:,2] ==6) | (data.iloc[:,2] == 7) |(data.iloc[:,2] ==8)  ) & (data.iloc[:,3] == 99 & data.iloc[:,3])
     data[mask67] = data.replace(99,2)
-    mask89 = (  (data.iloc[:,2] ==8) | (data.iloc[:,2] == 9)  ) & (data.iloc[:,3] == 99 & data.iloc[:,3])
+    mask89 = (   (data.iloc[:,2] == 9) | (data.iloc[:,2] == 10) ) & (data.iloc[:,3] == 99 & data.iloc[:,3])
     data[mask89]  = data.replace(99,3)
 
 
-    mask4 = (  (data.iloc[:,2] ==10)   ) & (data.iloc[:,3] == 4 & data.iloc[:,3])
-    data[mask4]  = data.replace(4,5)
+    # mask4 = (  (data.iloc[:,2] ==10)   ) & (data.iloc[:,3] == 4 & data.iloc[:,3])
+    # data[mask4]  = data.replace(4,5)
 
 
 
@@ -110,11 +110,11 @@ if __name__ == "__main__":
 
     from sklearn import  ensemble
     from sklearn import tree    
-    # model = svm.SVC(kernel='linear')
+    # model = svm.SVC(kernel='poly')
     # model = neighbors.KNeighborsClassifier()
     # model = linear_model.LinearRegression()
-    # model = ensemble.RandomForestClassifier(n_estimators=190, random_state=0)
-    model = tree.DecisionTreeClassifier( random_state=0)
+    model = ensemble.RandomForestClassifier(n_estimators=200, random_state=0)
+    # model = tree.DecisionTreeClassifier( random_state=0)
 
 
     from sklearn.preprocessing import StandardScaler

@@ -39,7 +39,7 @@ class MainWindow(QMainWindow):
     def start_loop(self):
         timer = QtCore.QTimer(self)
         timer.timeout.connect(self.start_tracking)
-        timer.start(50)
+        timer.start(150)
 
     def init_map(self):
         self.layout = QVBoxLayout(self.main_widget)
@@ -60,37 +60,40 @@ class MainWindow(QMainWindow):
         # Down Hallway starts at (1426,3054)
         data = get_data(self.firebase)
         rss_list = parse_data(data)
-        # print(rss_list)
+        print(rss_list)
         self.Coordinates = get_coordinates(rss_list)  # TO BE USED Later
-    
-        self.db.child("predictions").child("value").set(
-            self.yCoordinates)  # Push predictions to the cloud
-        print("Place Prediction: ", self.Coordinates)
 
         # TODO map coordinates to scale
-        if self.Coordinates == 0 :
+        if self.Coordinates == 0:
             print("in hall 0")
-            coords = mapCoordinates(
-            1426, 5700-264*self.yCoordinates, img)  
-        elif self.Coordinates == 1 :
+            coords = (1470, 5304)
+        elif self.Coordinates == 1:
             print("in hall 1")
-            coords = mapCoordinates(
-            1426-self.xCoordinates, 5700-264*self.yCoordinates, img)  
-        elif self.Coordinates == 2 :
+            coords = (1470, 4908)
+
+        elif self.Coordinates == 2:
             print("in hall 2")
-            pass    
-        elif self.Coordinates == 3 :
+            coords = (1470, 4100)
+        elif self.Coordinates == 3:
             print("in hall 3")
-            pass    
-        elif self.Coordinates == 5 :
-            print("in the Lab")
-            pass    
-        elif self.Coordinates == 6 :
+            coords = (1470, 3000)
+
+        elif self.Coordinates == 4:
             print("in TA ROOM")
-            pass    
-        
-        # coords = mapCoordinates(1426,5700-264*self.idx,img)
-        drawCircle(img, 5, coords, saved)
+            coords = (1100, 3200)
+        elif self.Coordinates == 5:
+            print("in the Lab")
+            coords = (900, 4350)
+
+        # Push predictions to the cloud
+        self.db.child("coordinates").child("x").set(
+            coords[0])
+        self.db.child("coordinates").child("y").set(
+            coords[1])
+
+        print("Place Prediction: ", self.Coordinates)
+        coords = mapCoordinates(coords[0], coords[1], img)
+        drawCircle(img, 7, coords, saved)
         pixmap = QPixmap('modified.png')
         self.label.setPixmap(pixmap)
 
