@@ -124,6 +124,13 @@ if __name__ == "__main__":
 
     model.fit(X_train , y_train )
 
+    # import m2cgen as m2c
+    # import sys
+    # sys.setrecursionlimit(2147483647)
+    # with open('./model.c','w') as f:
+    #     code = m2c.export_to_c(model)
+    #     f.write(code)
+
 
 
     import pickle
