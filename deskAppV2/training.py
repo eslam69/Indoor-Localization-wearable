@@ -15,66 +15,38 @@ from sklearn.metrics import precision_score
 
 
 def read_data(files: list) -> pd.DataFrame:
-    """read_data [Reads a list of file names and concatenate them into one dataframe]
-
-    Args:
-        files (list): [a list of file names]
-
-    Returns:
-        pd.DataFrame: [All Data]
-    """
     try:
         data_frames = [pd.read_excel(f) for f in files]
     except FileExistsError as e:
         print(e)
     Data = pd.concat(data_frames, ignore_index=True)
-    print("shape after reading=  ", Data.shape)
-    # print(Data)
     return Data
 
 
 def clean_data(data: pd.DataFrame) -> pd.DataFrame:
-    """clean_data [summary]
-
-    Args:
-        data (pd.DataFrame): [description]
-
-    Returns:
-        pd.DataFrame: [description]
-    """
-    # replace -99 entries with 0
-    # data= data.replace(to_replace=-99 ,value= 0)
-    print("shape after -99 replacements= ", data.shape)
-
-    # Remove STEP rows
-    data = data[data.iloc[:, 3] != "STEP"]
-    print("shape after Step replacements= ", data.shape)
+    data = data[data.iloc[:, :] != "STEP"]
 
     return data
 
 
 def splitTrainTest(data: pd.DataFrame):
-    X = data.iloc[:, 3:]
-    Y = data.iloc[:, 2:3]
+    X = data.iloc[:1173, 4:13]
+    Y = data.iloc[:1173, 2:3]
     xTrain, xTest, yTrain, yTest = train_test_split(X, Y, test_size=0.1, random_state=5)
-    print("       ", Y.shape)
-    print(xTrain.shape, yTrain.shape, yTest.shape)
 
     return xTrain.astype('int'), xTest.astype('int'), yTrain.astype('int'), yTest.astype('int')
 
 
 if __name__ == "__main__":
-    # create list of file names
     files = ["Data{}.xlsx".format(i) for i in range(1, 7)]
-    # fix file 1 name
-    print(files)
     files[0] = "Data1.xlsm"
     files[4] = "Data5.xlsm"
 
     Data = read_data(files)
+    print("done reading")
 
     Data = clean_data(Data)
-    # print(Data.to_string())
+    print("done cleaning")
 
     # split Data
     xTrain, xTest, yTrain, yTest = splitTrainTest(Data)
