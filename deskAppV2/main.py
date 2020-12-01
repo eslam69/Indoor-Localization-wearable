@@ -10,14 +10,31 @@ from model import get_data,parse_data, get_coordinates
 import time
 
 
+# configNew = {
+#     "apiKey": "AIzaSyBIFhbwdIXRf-TRlSvieuhw5VgnN4u9pp8",
+#     "authDomain": "esp32data-e59a5.firebaseio.com",
+#     "databaseURL": "https://esp32data-e59a5.firebaseio.com/",
+#     "projectId": "esp32data-e59a5",
+#     "storageBucket": "esp32data-e59a5.firebaseio.com",
+# }
+
 configNew = {
-    "apiKey": "AIzaSyBIFhbwdIXRf-TRlSvieuhw5VgnN4u9pp8",
-    "authDomain": "esp32data-e59a5.firebaseio.com",
-    "databaseURL": "https://esp32data-e59a5.firebaseio.com/",
-    "projectId": "esp32data-e59a5",
-    "storageBucket": "esp32data-e59a5.firebaseio.com",
+    "apiKey": "AIzaSyBNZHK027vpYHh5TXMzzjnAAWy5g3CZihw",
+    "authDomain": "localization-9e689.firebaseio.com",
+    "databaseURL": "https://localization-9e689.firebaseio.com",
+    "projectId": "localization-9e689",
+    "storageBucket": "localization-9e689.firebaseio.com",
+
 }
 
+#  apiKey: "AIzaSyBNZHK027vpYHh5TXMzzjnAAWy5g3CZihw",
+#     authDomain: "localization-9e689.firebaseapp.com",
+#     databaseURL: "https://l...content-available-to-author-only...o.com",
+#     projectId: "localization-9e689",
+    # storageBucket: "localization-9e689.appspot.com",
+#     messagingSenderId: "1095700650219",
+#     appId: "1:1095700650219:web:8cd6a6323cabf0f6be46ae",
+#     measurementId: "G-PQPC79W9XK"
 
 
 

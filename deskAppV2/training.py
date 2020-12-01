@@ -74,21 +74,17 @@ if __name__ == "__main__":
     Data = read_data(files)
 
     Data = clean_data(Data)
-    # print(Data.to_string())
+    print(Data.to_string())
 
     # split Data
-    xTrain, xTest, yTrain, yTest = splitTrainTest(Data)
+    # xTrain, xTest, yTrain, yTest = splitTrainTest(Data)
 
-    # print("prediction=", d_lf.predict(X))
-    # print("prediction2=", d_lf.predict([[-54, -99, -44, -60]]))
-    # print("TRUE_VALUE=", Y[100])
-    #
     # model = svm.SVR(kernel='poly')
     # model.fit(X_train , y_train )
 
-    model = SVC(gamma=0.009, C=3150).fit(xTrain, yTrain)
-    print("prediction=", model.predict(xTest))
-    print("TRUE_VALUE=", yTest)
+    # model = SVC(gamma=0.009, C=3150).fit(xTrain, yTrain)
+    # print("prediction=", model.predict(xTest))
+    # print("TRUE_VALUE=", yTest)
 
 
     import pickle
