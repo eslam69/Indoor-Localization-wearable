@@ -10,7 +10,7 @@ roomsH = 900 + 350
 croppedFloorHeight  = HallwayH + TAofficeH + NlabH + ElabH + roomsH
 croppedFloorWidth  = HallwayW
 
-def mapCoordinates(left,down,img):
+def mapCoordinates(right,down,img):
     """
         Maps the coordinates from cm to Pixels fitted to the Floor image, 
         coordinates are measured from top left corner
@@ -24,7 +24,7 @@ def mapCoordinates(left,down,img):
     yFactor = croppedFloorHeight / imgHeight
     xFactor = croppedFloorWidth / imgWidth
 
-    x = int(left / xFactor)
+    x = int(right / xFactor)
     y = int(down / yFactor) 
     return (x,y)
 
@@ -47,9 +47,20 @@ def drawCircle(img,radius,coordinates,saveTo):
 def reMapOrigin(modelCoordinates):
     modelX = modelCoordinates[0] 
     modelY = modelCoordinates[1]
-    boxH = 300 
-
-    X = modelX + ( HallwayW / 2) + 100 # fitting
+    print(f'modelX: {modelX}')
+    print(f'modelY:{modelY}')
+    boxH = 280 
+    boxW = 500 
+    if modelY == 11:
+        modelX = 1
+        modelY = 5
+    if modelY == 12:
+        modelX = 2
+        modelY = 5
+    if modelY == 13:
+        modelX = 1
+        modelY = 7
+    X =  ( HallwayW / 2) - (modelX * boxW) + 100 # fitting
     Y = croppedFloorHeight - (modelY * boxH)  - 100  
     return (X,Y)
 

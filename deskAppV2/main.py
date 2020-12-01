@@ -21,10 +21,9 @@ import time
 configNew = {
     "apiKey": "AIzaSyBNZHK027vpYHh5TXMzzjnAAWy5g3CZihw",
     "authDomain": "localization-9e689.firebaseio.com",
-    "databaseURL": "https://localization-9e689.firebaseio.com",
+    "databaseURL": "https://localization-9e689.firebaseio.com/",
     "projectId": "localization-9e689",
     "storageBucket": "localization-9e689.firebaseio.com",
-
 }
 
 #  apiKey: "AIzaSyBNZHK027vpYHh5TXMzzjnAAWy5g3CZihw",
@@ -75,10 +74,15 @@ class App(QtWidgets.QMainWindow):
         # time.sleep(0.005)
        
         data = get_data(self.firebase)
+        print(f'data : {data}')
+       
         rss_list = parse_data(data)
+        print(f'rss_list : {rss_list}')
+
         # print(rss_list)
         self.yCoordinates = get_coordinates(rss_list) # TO BE USED Later
-        self.db.child("coordinates/y").set(self.yCoordinates) # Push predictions to the cloud
+        self.yCoordinates = 0
+        self.db.child("coordinates/y").set(int(self.yCoordinates)) # Push predictions to the cloud
         # print(self.yCoordinates)
         
         
@@ -86,7 +90,7 @@ class App(QtWidgets.QMainWindow):
         
         predictedCords = (0,self.yCoordinates )
         print(predictedCords) 
-        drawnCircleRad = 6
+        drawnCircleRad = 12
         track(predictedCords,self.initImg,self.modImg,drawnCircleRad)
         self.refreshView(self.modImg)
 

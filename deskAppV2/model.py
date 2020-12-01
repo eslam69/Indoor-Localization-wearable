@@ -8,11 +8,11 @@ import numpy as np
 
 
 configNew = {
-    "apiKey": "AIzaSyBIFhbwdIXRf-TRlSvieuhw5VgnN4u9pp8",
-    "authDomain": "esp32data-e59a5.firebaseio.com",
-    "databaseURL": "https://esp32data-e59a5.firebaseio.com/",
-    "projectId": "esp32data-e59a5",
-    "storageBucket": "esp32data-e59a5.firebaseio.com",
+    "apiKey": "AIzaSyBNZHK027vpYHh5TXMzzjnAAWy5g3CZihw",
+    "authDomain": "localization-9e689.firebaseio.com",
+    "databaseURL": "https://localization-9e689.firebaseio.com/",
+    "projectId": "localization-9e689",
+    "storageBucket": "localization-9e689.firebaseio.com",
 }
 
 Firebase = pyrebase.initialize_app(configNew)
@@ -32,7 +32,7 @@ def get_data(firebase=None):
 
 def parse_data(data: str)->list :
     rss_list= data.split(",")
-    if len(rss_list) == 9:
+    if len(rss_list) == 8:
         rss_list = [int(wifi) for wifi in rss_list ]
         return(rss_list)
     else :
@@ -57,7 +57,7 @@ def get_coordinates(rss_list:list):
 
 if __name__ == "__main__":
 
-    filename = 'finalized_model_svr.sav'
+    filename = 'trainedModel.sav'
     loaded_model = pickle.load(open(filename, 'rb'))
     arr = np.array([-99, -58,  -99, -99,  -65,   -99,  -99,  -99,   -99],dtype=int).T
     entry = pd.DataFrame(arr ).transpose()
