@@ -24,13 +24,13 @@ def read_data(files: list) -> pd.DataFrame:
 
 
 def clean_data(data: pd.DataFrame) -> pd.DataFrame:
-    data = data[data.iloc[:, :] != "STEP"]
+    # data = data[data.iloc[:, :] != "STEP"]
     # data = data.dropna()
     # data = data[math.isnan(float(data.iloc[:, :]))  ]
     # x = float('nan')
     
-
-    return data
+    pass
+    # return data
 
 
 def splitTrainTest(data: pd.DataFrame):
@@ -50,12 +50,15 @@ if __name__ == "__main__":
     print("done reading")
     # print(Data.to_string())
 
-    Data = clean_data(Data)
+    # Data = clean_data(Data)
     print("done cleaning")
-    print(Data.to_string())
+    # print(Data)
 
     # split Data
-    # xTrain, xTest, yTrain, yTest = splitTrainTest(Data)
+    xTrain, xTest, yTrain, yTest = splitTrainTest(Data)
+    # print(yTrain)
+    # print(yTest.to_string())
+    # print(type(xTrain))
     # print(type(xTrain))
 
     # print(xTrain.to_string())
@@ -63,7 +66,7 @@ if __name__ == "__main__":
     # model = svm.SVR(kernel='poly')
     # model.fit(X_train , y_train )
 
-    # model = SVC(gamma=0.009, C=3150).fit(xTrain, yTrain)
+    model = SVC(gamma=0.009, C=3150).fit(xTrain, yTrain)
     # print("prediction=", model.predict(xTest))
     # print("TRUE_VALUE=", yTest)
 
