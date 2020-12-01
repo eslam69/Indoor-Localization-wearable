@@ -19,7 +19,7 @@ Firebase = pyrebase.initialize_app(configNew)
 
 
 #load model
-filename = 'finalized_model_svr.sav'
+filename = 'trainedModel.sav'
 loaded_model = pickle.load(open(filename, 'rb'))
 
 def get_data(firebase=None):
