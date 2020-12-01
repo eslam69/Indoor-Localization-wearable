@@ -12,7 +12,7 @@ from sklearn.svm import SVC
 from micromlgen import port
 import pandas as pd
 from sklearn.metrics import precision_score
-
+import math
 
 def read_data(files: list) -> pd.DataFrame:
     try:
@@ -25,6 +25,10 @@ def read_data(files: list) -> pd.DataFrame:
 
 def clean_data(data: pd.DataFrame) -> pd.DataFrame:
     data = data[data.iloc[:, :] != "STEP"]
+    # data = data.dropna()
+    # data = data[math.isnan(float(data.iloc[:, :]))  ]
+    # x = float('nan')
+    
 
     return data
 
@@ -44,12 +48,17 @@ if __name__ == "__main__":
 
     Data = read_data(files)
     print("done reading")
+    # print(Data.to_string())
 
     Data = clean_data(Data)
     print("done cleaning")
+    print(Data.to_string())
 
     # split Data
     # xTrain, xTest, yTrain, yTest = splitTrainTest(Data)
+    # print(type(xTrain))
+
+    # print(xTrain.to_string())
 
     # model = svm.SVR(kernel='poly')
     # model.fit(X_train , y_train )
@@ -61,8 +70,8 @@ if __name__ == "__main__":
 
     import pickle
 
-    filename = 'trainedModel.sav'
-    pickle.dump(model, open(filename, 'wb'))
+    # filename = 'trainedModel.sav'
+    # pickle.dump(model, open(filename, 'wb'))
 
     # entry = X_test.iloc[15:16, :]
     # y_label3 = y_test.iloc[15, 0]
