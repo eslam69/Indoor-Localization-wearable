@@ -80,18 +80,18 @@ class App(QtWidgets.QMainWindow):
         print(f'rss_list : {rss_list}')
 
         # print(rss_list)
-        self.yCoordinates = get_coordinates(rss_list) # TO BE USED Later
-        self.yCoordinates = 0
-        self.db.child("coordinates/y").set(int(self.yCoordinates)) # Push predictions to the cloud
+        self.predictedClass = get_coordinates(rss_list) # TO BE USED Later
+        self.predictedClass = 13
+        self.db.child("coordinates/y").set(int(self.predictedClass)) # Push predictions to the cloud
         # print(self.yCoordinates)
         
         
         # coords = mapCoordinates(1426,5700-264*self.yCoordinates,img)   # TODO Uncomment
         
-        predictedCords = (0,self.yCoordinates )
-        print(predictedCords) 
+        
+        # print(self.predictedClass) 
         drawnCircleRad = 12
-        track(predictedCords,self.initImg,self.modImg,drawnCircleRad)
+        track(self.predictedClass,self.initImg,self.modImg,drawnCircleRad)
         self.refreshView(self.modImg)
 
 

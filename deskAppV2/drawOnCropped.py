@@ -44,28 +44,48 @@ def drawCircle(img,radius,coordinates,saveTo):
         im.save(saveTo, "PNG")  
 
 
-def reMapOrigin(modelCoordinates):
-    modelX = modelCoordinates[0] 
-    modelY = modelCoordinates[1]
-    print(f'modelX: {modelX}')
-    print(f'modelY:{modelY}')
+# def reMapOrigin(modelCoordinates):
+#     modelX = modelCoordinates[0] 
+#     modelY = modelCoordinates[1]
+#     print(f'modelX: {modelX}')
+#     print(f'modelY:{modelY}')
+#     boxH = 280 
+#     boxW = 500 
+#     if modelY == 11:
+#         modelX = 1
+#         modelY = 5
+#     if modelY == 12:
+#         modelX = 2
+#         modelY = 5
+#     if modelY == 13:
+#         modelX = 1
+#         modelY = 7
+#     X =  ( HallwayW / 2) - (modelX * boxW) + 100 # fitting
+#     Y = croppedFloorHeight - (modelY * boxH)  - 100  
+#     return (X,Y)
+def reMapOrigin(modelClass):
+    print(f'modelClass:{modelClass}')
     boxH = 280 
     boxW = 500 
-    if modelY == 11:
+    if modelClass == 11:
         modelX = 1
         modelY = 5
-    if modelY == 12:
+    elif modelClass == 12:
         modelX = 2
         modelY = 5
-    if modelY == 13:
+    elif modelClass == 13:
         modelX = 1
         modelY = 7
+    else:
+        modelX = 0
+        modelY = modelClass
+        
     X =  ( HallwayW / 2) - (modelX * boxW) + 100 # fitting
     Y = croppedFloorHeight - (modelY * boxH)  - 100  
     return (X,Y)
 
-def track(modelCords,initImg,modifiedImg,circleRad):
-    x,y = reMapOrigin(modelCords)
+def track(modelClass,initImg,modifiedImg,circleRad):
+    x,y = reMapOrigin(modelClass)
     pixelX,pixelY = mapCoordinates(x,y,initImg)
     drawCircle(initImg,circleRad,(pixelX,pixelY),modifiedImg)
 
