@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "500319415393",
+    "firebase_url": "https://esp32data-e59a5.firebaseio.com",
+    "project_id": "esp32data-e59a5",
+    "storage_bucket": "esp32data-e59a5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:500319415393:android:58f217df0f1ff5d3f20e20",
+        "android_client_info": {
+          "package_name": "com.example.indoor_localization"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "500319415393-89kpm95baj9i9i4259ai2rh5dqo3ltlh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAr9IYGmoZ5QUwmjeyiYC_o3R7STjOzWeE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "500319415393-89kpm95baj9i9i4259ai2rh5dqo3ltlh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
