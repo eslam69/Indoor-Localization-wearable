@@ -10,11 +10,11 @@ from sklearn.preprocessing import scale
 
 
 configNew = {
-    "apiKey": "AIzaSyBIFhbwdIXRf-TRlSvieuhw5VgnN4u9pp8",
-    "authDomain": "esp32data-e59a5.firebaseio.com",
-    "databaseURL": "https://esp32data-e59a5.firebaseio.com/",
-    "projectId": "esp32data-e59a5",
-    "storageBucket": "esp32data-e59a5.firebaseio.com",
+    "apiKey": "AIzaSyBIFhbwdIXRf-TRlSvieuhw5VgnN4u9pp8",#Web API keyWeb API keyWeb API key
+    "authDomain": "esp32data-e59a5.firebaseio.com", #Project ID.firebaseio.com
+    "databaseURL": "https://esp32data-e59a5.firebaseio.com/",  #https://Project ID.firebaseio.com
+    "projectId": "esp32data-e59a5", #Project ID
+    "storageBucket": "esp32data-e59a5.firebaseio.com", #Project ID.firebaseio.com 
 }
 
 Firebase = pyrebase.initialize_app(configNew)

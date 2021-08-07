@@ -1,6 +1,6 @@
 import sys
 from PyQt5 import QtCore
-from PyQt5.QtGui import QPixmap
+from PyQt5.QtGui import QPixmap,QIcon
 from PyQt5.QtWidgets import QMainWindow, QApplication, QLabel, QVBoxLayout, QPushButton, QWidget
 from draw import mapCoordinates, drawCircle
 import pyrebase
@@ -101,6 +101,8 @@ class MainWindow(QMainWindow):
 if __name__ == "__main__":
 
     app = QApplication(sys.argv)
+    
+    app.setWindowIcon(QIcon('resources/logoMap.png'))
     w = MainWindow()
     # w.show()
     sys.exit(app.exec_())
