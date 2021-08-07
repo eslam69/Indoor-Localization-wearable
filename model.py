@@ -21,9 +21,9 @@ Firebase = pyrebase.initialize_app(configNew)
 
 
 #load model
-filename = 'final_model.sav'
+filename = 'models/final_model.sav'
 loaded_modelY = pickle.load(open(filename, 'rb'))
-Scaler = pickle.load(open("scaler.sav", 'rb'))
+# Scaler = pickle.load(open("scaler.sav", 'rb'))
 # loaded_modelX = pickle.load(open("finalized_model_svrX.sav", 'rb'))
 
 

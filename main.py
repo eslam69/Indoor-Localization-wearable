@@ -15,8 +15,8 @@ configNew = {
     "storageBucket": "esp32data-e59a5.firebaseio.com",
 }
 
-img = "departmentFloorMap.png"
-saved = "modified.png"
+img = "resources/departmentFloorMap.png"
+saved = "resources/modified.png"
 
 
 class MainWindow(QMainWindow):
@@ -44,7 +44,7 @@ class MainWindow(QMainWindow):
     def init_map(self):
         self.layout = QVBoxLayout(self.main_widget)
         self.label = QLabel(self)
-        pixmap = QPixmap('departmentFloorMap.png')
+        pixmap = QPixmap('resources/departmentFloorMap.png')
         self.button = QPushButton("Start", self)
         self.label.setPixmap(pixmap)
         self.layout.addWidget(self.button)
@@ -94,7 +94,7 @@ class MainWindow(QMainWindow):
         print("Place Prediction: ", self.Coordinates)
         coords = mapCoordinates(coords[0], coords[1], img)
         drawCircle(img, 7, coords, saved)
-        pixmap = QPixmap('modified.png')
+        pixmap = QPixmap('resources/modified.png')
         self.label.setPixmap(pixmap)
 
 
